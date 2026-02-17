@@ -6,7 +6,7 @@ import { useScrollReveal } from '../hooks/useAnimations'
 const contactIcons = [IconMail, IconPhone, IconMapPin]
 const contactValues = [
   { value: 'council@graduatecouncil.org', href: 'mailto:council@graduatecouncil.org' },
-  { value: '+1 (555) 219-4810', href: 'tel:+15552194810' },
+  { value: '+91 98765 43210', href: 'tel:+919876543210' },
   { value: 'Graduate Affairs Block, Room 204', href: null },
 ]
 

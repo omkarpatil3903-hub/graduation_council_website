@@ -126,6 +126,13 @@ export default function Layout() {
               >
                 {t.nav.langToggle}
               </button>
+              {/* Mobile Join Now */}
+              <Link
+                to="/be-a-part"
+                className="mt-2 block w-full rounded-lg bg-primary-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700"
+              >
+                {t.nav.joinNow}
+              </Link>
             </div>
           </nav>
         )}
@@ -175,7 +182,7 @@ export default function Layout() {
                 council@graduatecouncil.org
               </li>
               <li>Graduate Affairs Block, Room 204</li>
-              <li>+1 (555) 219-4810</li>
+              <li>+91 98765 43210</li>
             </ul>
           </div>
         </div>
