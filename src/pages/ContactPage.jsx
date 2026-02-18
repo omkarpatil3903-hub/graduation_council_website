@@ -15,6 +15,8 @@ export default function ContactPage() {
   const { t } = useLang()
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const contactLabels = [t.contact.email, t.contact.phone, t.contact.office]
 
@@ -22,8 +24,29 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    setSent(false)
+    setSubmitError('')
+
+    const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL || import.meta.env.VITE_MEMBERSHIP_API_URL
+    if (contactApiUrl) {
+      setSubmitting(true)
+      try {
+        const response = await fetch(contactApiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...form, formType: 'contact' }),
+        })
+        if (!response.ok) throw new Error('Request failed')
+      } catch {
+        setSubmitError(t.contact.errorMsg)
+        setSubmitting(false)
+        return
+      }
+      setSubmitting(false)
+    }
+
     setSent(true)
     setForm({ name: '', email: '', subject: '', message: '' })
   }
@@ -90,14 +113,20 @@ export default function ContactPage() {
 
               <button
                 type="submit"
+                disabled={submitting}
                 className="w-full rounded-lg bg-primary-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700 sm:w-fit"
               >
-                {t.contact.sendBtn}
+                {submitting ? t.contact.submittingBtn : t.contact.sendBtn}
               </button>
 
               {sent && (
                 <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
                   {t.contact.sentMsg}
+                </p>
+              )}
+              {submitError && (
+                <p className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+                  {submitError}
                 </p>
               )}
             </form>
