@@ -11,11 +11,21 @@ export function useScrollReveal() {
     const root = ref.current
     if (!root) return
 
+    const observed = new WeakSet()
+
+    function observeElement(element, observer) {
+      if (observed.has(element) || element.classList.contains('is-visible')) return
+      element.classList.add('reveal-pending')
+      observed.add(element)
+      observer.observe(element)
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible')
+            entry.target.classList.remove('reveal-pending')
             observer.unobserve(entry.target)
           }
         })
@@ -24,9 +34,29 @@ export function useScrollReveal() {
     )
 
     const elements = root.querySelectorAll('.animate-on-scroll')
-    elements.forEach((el) => observer.observe(el))
+    elements.forEach((el) => observeElement(el, observer))
 
-    return () => observer.disconnect()
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof HTMLElement)) return
+
+          if (node.classList.contains('animate-on-scroll')) {
+            observeElement(node, observer)
+          }
+
+          const nested = node.querySelectorAll?.('.animate-on-scroll')
+          nested?.forEach((el) => observeElement(el, observer))
+        })
+      })
+    })
+
+    mutationObserver.observe(root, { childList: true, subtree: true })
+
+    return () => {
+      mutationObserver.disconnect()
+      observer.disconnect()
+    }
   }, [])
 
   return ref

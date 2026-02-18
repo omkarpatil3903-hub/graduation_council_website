@@ -41,13 +41,17 @@
   }
 }
 
-/* Scroll-triggered animation helper — elements with this class fade in when visible */
+/* Scroll-triggered animation helper — safe-by-default visibility */
 .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
-.animate-on-scroll.is-visible {
+.animate-on-scroll.reveal-pending {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.animate-on-scroll.reveal-pending.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

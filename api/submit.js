@@ -4,24 +4,88 @@ export default async function handler(req, res) {
     return res.status(405).json({ ok: false, error: 'Method not allowed' })
   }
 
-  const targetUrl = process.env.GOOGLE_SCRIPT_WEB_APP_URL || process.env.VITE_MEMBERSHIP_API_URL
+  const payload = req.body || {}
+  const requestedFormType = String(payload.formType || '').toLowerCase()
+  const formType = ['contact', 'membership', 'grievance'].includes(requestedFormType)
+    ? requestedFormType
+    : 'membership'
+
+  const contactUrl = process.env.GOOGLE_SCRIPT_CONTACT_URL || process.env.VITE_CONTACT_API_URL
+  const membershipUrl = process.env.GOOGLE_SCRIPT_MEMBERSHIP_URL || process.env.VITE_MEMBERSHIP_API_URL
+  const grievanceUrl = process.env.GOOGLE_SCRIPT_GRIEVANCE_URL || process.env.VITE_GRIEVANCE_API_URL
+  const defaultUrl = process.env.GOOGLE_SCRIPT_WEB_APP_URL
+
+  const routeMap = {
+    contact: {
+      url: contactUrl,
+      upstreamFormType: process.env.GOOGLE_SCRIPT_CONTACT_FORM_TYPE || 'contact',
+      sheetName: process.env.GOOGLE_SCRIPT_CONTACT_SHEET_NAME || 'Contact',
+    },
+    membership: {
+      url: membershipUrl,
+      upstreamFormType: process.env.GOOGLE_SCRIPT_MEMBERSHIP_FORM_TYPE || 'membership',
+      sheetName: process.env.GOOGLE_SCRIPT_MEMBERSHIP_SHEET_NAME || 'Membership',
+    },
+    grievance: {
+      url: grievanceUrl,
+      upstreamFormType: process.env.GOOGLE_SCRIPT_GRIEVANCE_FORM_TYPE || 'grievance',
+      sheetName: process.env.GOOGLE_SCRIPT_GRIEVANCE_SHEET_NAME || 'Grievance',
+    },
+  }
+
+  const selectedRoute = routeMap[formType]
+
+  const targetUrl =
+    selectedRoute?.url ||
+    defaultUrl ||
+    grievanceUrl ||
+    membershipUrl ||
+    contactUrl
+
   if (!targetUrl) {
     return res.status(500).json({ ok: false, error: 'Google Script URL is not configured' })
+  }
+
+  const outboundPayload = {
+    ...payload,
+    formType: selectedRoute?.upstreamFormType || formType,
+    sheetName: selectedRoute?.sheetName,
   }
 
   try {
     const response = await fetch(targetUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(req.body || {}),
+      body: JSON.stringify(outboundPayload),
     })
 
     if (!response.ok) {
-      return res.status(502).json({ ok: false, error: 'Upstream request failed' })
+      const rawError = await response.text().catch(() => '')
+      return res.status(502).json({
+        ok: false,
+        error: rawError || `Upstream request failed with status ${response.status}`,
+      })
+    }
+
+    const raw = await response.text()
+    let parsed = null
+    try {
+      parsed = raw ? JSON.parse(raw) : null
+    } catch {
+      parsed = null
+    }
+
+    if (parsed && parsed.ok === false) {
+      const upstreamError = String(parsed.error || 'Google Script rejected the request')
+      const appendRowHint = upstreamError.includes("appendRow")
+        ? ` (sheet lookup failed for formType='${outboundPayload.formType}' and sheetName='${outboundPayload.sheetName || ''}')`
+        : ''
+
+      return res.status(200).json({ ok: false, error: `${upstreamError}${appendRowHint}` })
     }
 
     return res.status(200).json({ ok: true })
-  } catch {
-    return res.status(502).json({ ok: false, error: 'Unable to submit form' })
+  } catch (error) {
+    return res.status(502).json({ ok: false, error: error?.message || 'Unable to submit form' })
   }
 }

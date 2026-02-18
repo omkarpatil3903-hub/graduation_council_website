@@ -3,6 +3,8 @@ export const en = {
   nav: {
     home: "Home",
     about: "About Us",
+    constituencies: "Constituencies",
+    grievance: "Grievance",
     blog: "Blog & News",
     contact: "Contact",
     bePart: "Be a Part",
@@ -20,6 +22,162 @@ export const en = {
     tagline:
       "Committed to advancing graduate representation, supporting academic excellence, and building a stronger scholarly community.",
     joinCouncil: "Join the Council",
+  },
+
+  /* ── Constituencies Page ── */
+  constituencies: {
+    tag: "Representation",
+    heroTitle: "Graduates' Constituencies",
+    heroDesc:
+      "Our council represents distinct graduate constituencies so that policy, services, and support reflect real needs across disciplines and lived experiences.",
+    groupsTag: "Who We Represent",
+    groupsTitle: "Core Graduate Constituencies",
+    groupsDesc:
+      "These are the key groups for which elected representatives gather concerns, propose solutions, and track outcomes.",
+    groups: [
+      {
+        title: "Research Scholars (MPhil/PhD)",
+        desc: "Focuses on supervision quality, research infrastructure, lab access, ethics timelines, conference support, and thesis progress systems.",
+      },
+      {
+        title: "Coursework Postgraduates",
+        desc: "Addresses curriculum load, class scheduling, project guidance, internships, and industry-readiness pathways.",
+      },
+      {
+        title: "International Graduate Students",
+        desc: "Supports onboarding, visa/document guidance, academic transition, language support, and cultural integration.",
+      },
+      {
+        title: "Departmental Constituencies",
+        desc: "Ensures each department has a clear channel for local academic concerns, facilities issues, and program-specific feedback.",
+      },
+      {
+        title: "Inclusion & Wellbeing Constituencies",
+        desc: "Advances accessibility, mental wellbeing, gender equity, anti-discrimination, and safe campus engagement.",
+      },
+      {
+        title: "Professional & Career Constituencies",
+        desc: "Works on placements, employability workshops, entrepreneurship support, and alumni mentoring opportunities.",
+      },
+    ],
+    channelTag: "How Voice Reaches Action",
+    channelTitle: "Representation Channels",
+    channels: [
+      {
+        title: "Constituency Representatives",
+        desc: "Each constituency elects or nominates student representatives to capture priorities and coordinate regular feedback loops.",
+      },
+      {
+        title: "Council Deliberation",
+        desc: "Issues are reviewed in council forums where evidence, student feedback, and practical constraints are discussed.",
+      },
+      {
+        title: "Institutional Committees",
+        desc: "Approved proposals are escalated to university committees for policy changes, implementation, and formal follow-up.",
+      },
+    ],
+    prioritiesTag: "Current Agenda",
+    prioritiesTitle: "Shared Priorities Across Constituencies",
+    priorities: [
+      "Transparent and timely grievance resolution",
+      "Improved research and learning infrastructure",
+      "Inclusive support for international and underrepresented groups",
+      "Affordable housing, transport, and essential student services",
+      "Career pathways through industry and alumni engagement",
+      "Data-informed policy updates with student feedback",
+    ],
+  },
+
+  /* ── Grievance Page ── */
+  grievance: {
+    tag: "Support & Redressal",
+    heroTitle: "Register Your Grievance",
+    heroDesc:
+      "Use this channel to report academic, administrative, wellbeing, or infrastructure concerns. The council records every grievance, acknowledges receipt, and follows a transparent resolution workflow.",
+    categoriesTag: "Common Areas",
+    categoriesTitle: "What You Can Report",
+    categories: [
+      {
+        title: "Academic Concerns",
+        desc: "Issues related to supervision, evaluation timelines, coursework workload, or research process bottlenecks.",
+      },
+      {
+        title: "Administrative Delays",
+        desc: "Problems in approvals, certificates, fee records, documentation, or communication with offices.",
+      },
+      {
+        title: "Wellbeing & Safety",
+        desc: "Concerns involving harassment, discrimination, hostile conduct, mental wellbeing, or unsafe experiences.",
+      },
+      {
+        title: "Facilities & Services",
+        desc: "Library, lab, internet, hostel, transport, or other essential campus service-related complaints.",
+      },
+    ],
+    processTag: "How It Works",
+    processTitle: "Grievance Handling Process",
+    process: [
+      {
+        title: "Submit",
+        desc: "You share the concern with key details and preferred resolution through the form below.",
+      },
+      {
+        title: "Acknowledge",
+        desc: "The council sends an acknowledgement and assigns a grievance tracking reference.",
+      },
+      {
+        title: "Review",
+        desc: "The issue is verified with relevant representatives and escalated to the right committee or office.",
+      },
+      {
+        title: "Resolve & Follow Up",
+        desc: "You receive an outcome update and next steps, including escalation options when needed.",
+      },
+    ],
+    formTitle: "Grievance Registration Form",
+    formDesc:
+      "Please provide complete and factual details so we can assess and route your case quickly.",
+    labelName: "Full Name",
+    labelEmail: "Email",
+    labelPhone: "Phone",
+    labelDept: "Department",
+    labelCategory: "Grievance Category",
+    labelDetails: "Describe the Grievance",
+    labelResolution: "Preferred Resolution (Optional)",
+    placeCategory: "Select a category",
+    categoryOptions: [
+      "Academic Concerns",
+      "Administrative Delays",
+      "Wellbeing & Safety",
+      "Facilities & Services",
+      "Other",
+    ],
+    placeDetails:
+      "Include what happened, when it happened, and any relevant context or prior communication.",
+    placeResolution:
+      "Share what outcome you are expecting (for example: clarification, corrective action, meeting, or escalation).",
+    submitBtn: "Submit Grievance",
+    submittingBtn: "Submitting...",
+    successMsg:
+      "Your grievance has been registered successfully. The council will review and contact you soon.",
+    errorMsg:
+      "Submission failed. Please try again or contact the council directly.",
+    errName: "Full name is required.",
+    errEmail: "Email is required.",
+    errEmailInvalid: "Enter a valid email address.",
+    errDept: "Department is required.",
+    errCategory: "Please select a grievance category.",
+    errDetails: "Please describe your grievance.",
+    assuranceTag: "Our Commitment",
+    assuranceTitle: "What You Can Expect",
+    assurances: [
+      "Confidential handling with limited access to grievance details",
+      "Fair review based on facts and relevant policy context",
+      "Timely communication during each stage of processing",
+      "Escalation support when initial resolution is not satisfactory",
+      "No retaliation policy for good-faith grievance reporting",
+      "Recordkeeping for transparency and institutional improvement",
+    ],
   },
 
   /* ── Home Page ── */

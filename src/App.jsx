@@ -3,7 +3,9 @@ import Layout from './components/Layout'
 import AboutPage from './pages/AboutPage'
 import BePartPage from './pages/BePartPage'
 import BlogPage from './pages/BlogPage'
+import ConstituenciesPage from './pages/ConstituenciesPage'
 import ContactPage from './pages/ContactPage'
+import GrievancePage from './pages/GrievancePage'
 import HomePage from './pages/HomePage'
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="blog" element={<BlogPage />} />
+        <Route path="constituencies" element={<ConstituenciesPage />} />
+        <Route path="grievance" element={<GrievancePage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="be-a-part" element={<BePartPage />} />
       </Route>

@@ -62,9 +62,12 @@ export default function BePartPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, formType: 'membership' }),
       })
-      if (!response.ok) throw new Error('Request failed')
-    } catch {
-      setSubmitError(t.bePart.errorMsg)
+      const result = await response.json().catch(() => null)
+      if (!response.ok || !result?.ok) {
+        throw new Error(result?.error || 'Request failed')
+      }
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : t.bePart.errorMsg)
       setSubmitted(false)
       setSubmitting(false)
       return

@@ -44,9 +44,12 @@ export default function ContactPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, formType: "contact" }),
       });
-      if (!response.ok) throw new Error("Request failed");
-    } catch {
-      setSubmitError(t.contact.errorMsg);
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.ok) {
+        throw new Error(result?.error || "Request failed");
+      }
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : t.contact.errorMsg);
       setSubmitting(false);
       return;
     }

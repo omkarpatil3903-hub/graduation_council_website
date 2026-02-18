@@ -6,6 +6,8 @@ import { IconClose, IconMail, IconMenu } from './Icons'
 const navKeys = [
   { to: '/', key: 'home' },
   { to: '/about', key: 'about' },
+  { to: '/constituencies', key: 'constituencies' },
+  { to: '/grievance', key: 'grievance' },
   { to: '/blog', key: 'blog' },
   { to: '/contact', key: 'contact' },
   { to: '/be-a-part', key: 'bePart' },
@@ -14,6 +16,8 @@ const navKeys = [
 const footerKeys = [
   { to: '/', key: 'home' },
   { to: '/about', key: 'about' },
+  { to: '/constituencies', key: 'constituencies' },
+  { to: '/grievance', key: 'grievance' },
   { to: '/blog', key: 'blog' },
   { to: '/contact', key: 'contact' },
   { to: '/be-a-part', key: 'bePart' },
@@ -21,8 +25,8 @@ const footerKeys = [
 
 function desktopNavClass({ isActive }) {
   return isActive
-    ? 'relative py-2 text-sm font-semibold text-primary-700 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary-600'
-    : 'relative py-2 text-sm font-medium text-slate-600 transition hover:text-primary-700'
+    ? 'relative shrink-0 whitespace-nowrap py-2 text-sm font-semibold text-primary-700 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary-600'
+    : 'relative shrink-0 whitespace-nowrap py-2 text-sm font-medium text-slate-600 transition hover:text-primary-700'
 }
 
 function mobileNavClass({ isActive }) {
@@ -78,7 +82,7 @@ export default function Layout() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
+          <nav className="hidden items-center gap-4 md:flex lg:gap-5" aria-label="Main navigation">
             {navKeys.map((item) => (
               <NavLink key={item.to} to={item.to} end={item.to === '/'} className={desktopNavClass}>
                 {t.nav[item.key]}
@@ -87,14 +91,14 @@ export default function Layout() {
             {/* Language toggle */}
             <button
               onClick={toggleLang}
-              className="rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-primary-400 hover:text-primary-700"
+              className="shrink-0 rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-primary-400 hover:text-primary-700"
               aria-label="Toggle language"
             >
               {t.nav.langToggle}
             </button>
             <Link
               to="/be-a-part"
-              className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700"
+              className="shrink-0 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700"
             >
               {t.nav.joinNow}
             </Link>
