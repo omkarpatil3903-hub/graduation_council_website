@@ -56,21 +56,18 @@ export default function BePartPage() {
     setSubmitting(true)
     setSubmitError('')
 
-    const membershipApiUrl = import.meta.env.VITE_MEMBERSHIP_API_URL
-    if (membershipApiUrl) {
-      try {
-        const response = await fetch(membershipApiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        })
-        if (!response.ok) throw new Error('Request failed')
-      } catch {
-        setSubmitError(t.bePart.errorMsg)
-        setSubmitted(false)
-        setSubmitting(false)
-        return
-      }
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, formType: 'membership' }),
+      })
+      if (!response.ok) throw new Error('Request failed')
+    } catch {
+      setSubmitError(t.bePart.errorMsg)
+      setSubmitted(false)
+      setSubmitting(false)
+      return
     }
 
     setErrors({})
