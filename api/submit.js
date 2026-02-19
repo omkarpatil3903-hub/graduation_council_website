@@ -6,21 +6,15 @@ export default async function handler(req, res) {
 
   const payload = req.body || {}
   const requestedFormType = String(payload.formType || '').toLowerCase()
-  const formType = ['contact', 'membership', 'grievance'].includes(requestedFormType)
+  const formType = ['membership', 'grievance'].includes(requestedFormType)
     ? requestedFormType
     : 'membership'
 
-  const contactUrl = process.env.GOOGLE_SCRIPT_CONTACT_URL || process.env.VITE_CONTACT_API_URL
   const membershipUrl = process.env.GOOGLE_SCRIPT_MEMBERSHIP_URL || process.env.VITE_MEMBERSHIP_API_URL
   const grievanceUrl = process.env.GOOGLE_SCRIPT_GRIEVANCE_URL || process.env.VITE_GRIEVANCE_API_URL
   const defaultUrl = process.env.GOOGLE_SCRIPT_WEB_APP_URL
 
   const routeMap = {
-    contact: {
-      url: contactUrl,
-      upstreamFormType: process.env.GOOGLE_SCRIPT_CONTACT_FORM_TYPE || 'contact',
-      sheetName: process.env.GOOGLE_SCRIPT_CONTACT_SHEET_NAME || 'Contact',
-    },
     membership: {
       url: membershipUrl,
       upstreamFormType: process.env.GOOGLE_SCRIPT_MEMBERSHIP_FORM_TYPE || 'membership',
@@ -39,8 +33,7 @@ export default async function handler(req, res) {
     selectedRoute?.url ||
     defaultUrl ||
     grievanceUrl ||
-    membershipUrl ||
-    contactUrl
+    membershipUrl
 
   if (!targetUrl) {
     return res.status(500).json({ ok: false, error: 'Google Script URL is not configured' })

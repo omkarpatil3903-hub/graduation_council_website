@@ -345,25 +345,6 @@ export default function BlogPage() {
                   </div>
                 </div>
 
-                {/* Newsletter CTA */}
-                <div className="animate-on-scroll mt-6 rounded-2xl border border-primary-200 bg-gradient-to-br from-primary-50 to-white p-6 shadow-sm">
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-primary-800">{t.blog.newsletterTitle}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-500">{t.blog.newsletterDesc}</p>
-                  <form className="mt-4" onSubmit={(e) => e.preventDefault()}>
-                    <input
-                      type="email"
-                      placeholder={t.blog.newsletterPlaceholder}
-                      className="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2 text-sm outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
-                    />
-                    <button
-                      type="submit"
-                      className="mt-3 w-full rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-700"
-                    >
-                      {t.blog.newsletterBtn}
-                    </button>
-                  </form>
-                </div>
-
                 {/* Category links */}
                 <div className="animate-on-scroll mt-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
                   <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">{t.blog.categories}</h3>
@@ -389,26 +370,6 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* ═══ Newsletter banner (mobile + visible on all screens) ═══ */}
-      <section className="border-t border-gray-200 bg-white py-10 sm:py-14 lg:hidden">
-        <div className="mx-auto max-w-lg px-4 text-center sm:px-6">
-          <h2 className="text-lg font-bold text-slate-900 sm:text-xl">{t.blog.newsletterTitle}</h2>
-          <p className="mt-2 text-sm text-slate-500">{t.blog.newsletterDesc}</p>
-          <form className="mt-5 flex flex-col gap-2 sm:flex-row" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder={t.blog.newsletterPlaceholder}
-              className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
-            />
-            <button
-              type="submit"
-              className="shrink-0 rounded-lg bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-700"
-            >
-              {t.blog.newsletterBtn}
-            </button>
-          </form>
-        </div>
-      </section>
     </div>
   )
 }

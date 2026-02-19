@@ -7,11 +7,10 @@ const initialForm = {
   fullName: '',
   email: '',
   phone: '',
-  department: '',
   degreeProgram: '',
   yearOfStudy: '',
-  interests: '',
-  contribution: '',
+  villageLocality: '',
+  district: '',
 }
 
 export default function BePartPage() {
@@ -36,9 +35,9 @@ export default function BePartPage() {
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       next.email = t.bePart.errEmailInvalid
     }
-    if (!formData.department.trim()) next.department = t.bePart.errDept
     if (!formData.degreeProgram.trim()) next.degreeProgram = t.bePart.errDegree
-    if (!formData.interests.trim()) next.interests = t.bePart.errInterests
+    if (!formData.villageLocality.trim()) next.villageLocality = t.bePart.errVillage
+    if (!formData.district.trim()) next.district = t.bePart.errDistrict
     return next
   }
 
@@ -122,34 +121,23 @@ export default function BePartPage() {
 
             <form className="mt-8 grid gap-5" onSubmit={handleSubmit} noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
-                <FormField label={t.bePart.labelName} name="fullName" value={formData.fullName} onChange={handleChange} error={errors.fullName} required />
-                <FormField label={t.bePart.labelEmail} name="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} required />
-                <FormField label={t.bePart.labelPhone} name="phone" type="tel" value={formData.phone} onChange={handleChange} error={errors.phone} />
-                <FormField label={t.bePart.labelDept} name="department" value={formData.department} onChange={handleChange} error={errors.department} required />
+                <FormField label={t.bePart.labelName} name="fullName" value={formData.fullName} onChange={handleChange} error={errors.fullName} required placeholder={t.bePart.placeName} />
+                <FormField label={t.bePart.labelEmail} name="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} required placeholder={t.bePart.placeEmail} />
+                <FormField label={t.bePart.labelPhone} name="phone" type="tel" value={formData.phone} onChange={handleChange} error={errors.phone} placeholder={t.bePart.placePhone} />
                 <FormField label={t.bePart.labelDegree} name="degreeProgram" value={formData.degreeProgram} onChange={handleChange} error={errors.degreeProgram} required placeholder={t.bePart.placeDegree} />
                 <FormField label={t.bePart.labelYear} name="yearOfStudy" value={formData.yearOfStudy} onChange={handleChange} error={errors.yearOfStudy} placeholder={t.bePart.placeYear} />
+                <FormField label={t.bePart.labelVillage} name="villageLocality" value={formData.villageLocality} onChange={handleChange} error={errors.villageLocality} required placeholder={t.bePart.placeVillage} />
+                <SelectField
+                  label={t.bePart.labelDistrict}
+                  name="district"
+                  value={formData.district}
+                  onChange={handleChange}
+                  error={errors.district}
+                  required
+                  placeholder={t.bePart.placeDistrict}
+                  options={t.bePart.districtOptions}
+                />
               </div>
-
-              <FormField
-                label={t.bePart.labelInterests}
-                name="interests"
-                value={formData.interests}
-                onChange={handleChange}
-                error={errors.interests}
-                required
-                multiline
-                placeholder={t.bePart.placeInterests}
-              />
-
-              <FormField
-                label={t.bePart.labelContrib}
-                name="contribution"
-                value={formData.contribution}
-                onChange={handleChange}
-                error={errors.contribution}
-                multiline
-                placeholder={t.bePart.placeContrib}
-              />
 
               <button
                 type="submit"
@@ -234,6 +222,37 @@ function FormField({ label, name, value, onChange, error, type = 'text', require
       ) : (
         <input type={type} name={name} value={value} onChange={onChange} className={`${base} ${borderClass}`} placeholder={placeholder} />
       )}
+      {error && <span className="text-xs text-rose-600">{error}</span>}
+    </label>
+  )
+}
+
+function SelectField({ label, name, value, onChange, error, required = false, placeholder = '', options = [] }) {
+  const base =
+    'w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-slate-800 outline-none transition'
+  const borderClass = error
+    ? 'border-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-100'
+    : 'border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100'
+
+  return (
+    <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+      <span>
+        {label}
+        {required && <span className="ml-1 text-rose-500">*</span>}
+      </span>
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={`${base} ${borderClass}`}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
       {error && <span className="text-xs text-rose-600">{error}</span>}
     </label>
   )

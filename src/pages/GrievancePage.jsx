@@ -141,10 +141,10 @@ export default function GrievancePage() {
 
             <form className="mt-7 grid gap-5" onSubmit={handleSubmit} noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
-                <FormField label={t.grievance.labelName} name="fullName" value={formData.fullName} onChange={handleChange} error={errors.fullName} required />
-                <FormField label={t.grievance.labelEmail} name="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} required />
-                <FormField label={t.grievance.labelPhone} name="phone" type="tel" value={formData.phone} onChange={handleChange} error={errors.phone} />
-                <FormField label={t.grievance.labelDept} name="department" value={formData.department} onChange={handleChange} error={errors.department} required />
+                <FormField label={t.grievance.labelName} name="fullName" value={formData.fullName} onChange={handleChange} error={errors.fullName} required placeholder={t.grievance.placeName} />
+                <FormField label={t.grievance.labelEmail} name="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} required placeholder={t.grievance.placeEmail} />
+                <FormField label={t.grievance.labelPhone} name="phone" type="tel" value={formData.phone} onChange={handleChange} error={errors.phone} placeholder={t.grievance.placePhone} />
+                <FormField label={t.grievance.labelDept} name="department" value={formData.department} onChange={handleChange} error={errors.department} required placeholder={t.grievance.placeDept} />
               </div>
 
               <label className="grid gap-1.5 text-sm font-medium text-slate-700">
