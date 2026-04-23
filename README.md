@@ -1,16 +1,78 @@
-# React + Vite
+# Graduate Student Council Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the official repository for the Graduate Student Council (GSC) website. 
 
-Currently, two official plugins are available:
+The website serves as the central hub for the GSC, focusing on advocacy, leadership, and community for graduate scholars. It provides information and resources for graduate students, as well as a platform for communication and engagement.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features & Pages
 
-## React Compiler
+The application is built as a Single Page Application (SPA) with the following key sections:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Home**: The landing page with announcements, mission statement, and quick links.
+- **About**: Information about the Graduate Student Council, its history, leadership team, and mission.
+- **Blog**: Latest news, articles, and updates relevant to graduate students.
+- **Constituencies**: Details on the various departments, schools, or groups represented by the council.
+- **Grievance**: A portal for students to submit and track grievances or concerns securely.
+- **Contact**: Contact information and a form to get in touch with the council directly.
+- **Be a Part**: Information on how to get involved, open positions, and volunteer opportunities.
 
-## Expanding the ESLint configuration
+## Technology Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project is built using modern web development tools to ensure a fast, responsive, and maintainable application:
+
+- **React**: Frontend UI library.
+- **Vite**: Next-generation frontend tooling for fast development and building.
+- **React Router**: For handling navigation and routing within the SPA.
+- **Tailwind CSS**: A utility-first CSS framework for rapid and responsive UI development.
+- **ESLint**: For maintaining code quality and consistency.
+
+## Getting Started
+
+To run the project locally, follow these steps:
+
+### Prerequisites
+
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd graduate-council-website
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development Server
+
+To start the local development server:
+
+```bash
+npm run dev
+```
+
+This will run the application in development mode. Open your browser and navigate to the local URL provided in the terminal (usually `http://localhost:5173`) to view it. The page will reload when you make changes.
+
+### Building for Production
+
+To build the app for production:
+
+```bash
+npm run build
+```
+
+This will bundle the application into the `dist` directory, optimizing the build for the best performance.
+
+### Linting
+
+To run the linter to check for code formatting and style issues:
+
+```bash
+npm run lint
+```
